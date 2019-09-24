@@ -1,7 +1,7 @@
 var Book = require('../models/book');
 var Author = require('../models/author');
 var Genre = require('../models/genre');
-var BookInstance = require('../models/bookinstance');
+// var BookInstance = require('../models/bookinstance');
 
 var async = require('async');
 
@@ -11,12 +11,12 @@ exports.index = function (req, res) {
         book_count: function (callback) {
             Book.count({}, callback); // Pass an empty object as match condition to find all documents of this collection
         },
-        book_instance_count: function (callback) {
-            BookInstance.count({}, callback);
-        },
-        book_instance_available_count: function (callback) {
-            BookInstance.count({ status: 'Available' }, callback);
-        },
+        // book_instance_count: function (callback) {
+        //     BookInstance.count({}, callback);
+        // },
+        // book_instance_available_count: function (callback) {
+        //     BookInstance.count({ status: 'Available' }, callback);
+        // },
         author_count: function (callback) {
             Author.count({}, callback);
         },
