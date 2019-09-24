@@ -43,4 +43,27 @@ router.get('/bookinstances/:id', book_instance_controller.bookinstance_detail);
 
 router.get('/bookinstances', book_instance_controller.bookinstance_list);
 
+//作者路由
+
+router.get('/authors/create', author_controller.author_create_post);
+
+router.post('/authors/create', author_controller.author_create_post);
+
+router.get('/authors/:id/delete', author_controller.author_delete_get);
+
+router.post('/authors/:id/delete', author_controller.author_delete_post);
+
+router.get('/authors/:id/update', author_controller.author_update_get);
+
+router.post('/authors/:id/update', author_controller.author_update_post);
+
+router.get('/authors/:id', author_controller.author_detail);
+
+router.get('/authors', author_controller.author_list);
+
+//种类
+router.get('/genres', genre_controller.genre_list);
+
+router.get('/genres/:id', genre_controller.genre_detail);
+
 module.exports = router

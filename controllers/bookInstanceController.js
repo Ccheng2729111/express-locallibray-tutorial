@@ -6,7 +6,6 @@ exports.bookinstance_list = (req, res, next) => {
     BookInstance.find()
         .populate('book')
         .exec(function (err, list_bookinstances) {
-            console.log(list_bookinstances)
             if (err) { return next(err) }
             res.render('bookinstance_list', { title: 'Book Instance List', bookInstance_list: list_bookinstances })
         })
