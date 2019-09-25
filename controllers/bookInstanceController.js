@@ -1,4 +1,4 @@
-const BookInstance = require('../models/bookInstance');
+let BookInstance = require('../models/bookInstance');
 
 //显示完整列表
 exports.bookinstance_list = (req, res, next) => {

@@ -1,7 +1,7 @@
 var Book = require('../models/book');
 var Author = require('../models/author');
 var Genre = require('../models/genre');
-// var BookInstance = require('../models/bookinstance');
+let BookInstance = require('../models/BookInstance');
 
 var async = require('async');
 
@@ -39,7 +39,30 @@ exports.book_list = function (req, res, next) {
 };
 
 //为每位作者显示详情的页面  
-exports.book_detail = (req, res) => { res.send('未实现：作者详情信息' + req.params.id) };
+exports.book_detail = (req, res, next) => {
+    async.parallel({
+        book: function (callback) {
+            Book.findById(req.params.id)
+                .populate('author')
+                .populate('genre')
+                .exec(callback);
+        },
+
+        book_instance: function (callback) {
+            BookInstance.find({ 'book': req.params.id })
+                .exec(callback)
+        }
+    }, function (err, results) {
+        if (err) { return next(err) };
+        if (results.book == null) {
+            let err = new Error('Book not found')
+            err.status = 404
+            return next(err)
+        }
+
+        res.render('book_detail', { title: 'Title', book: results.book, book_instances: results.book_instance })
+    })
+};
 
 //由GET显示创建作者的表单
 exports.book_create_get = (req, res) => { res.send('未实现：作者创建表单的 GET') };
